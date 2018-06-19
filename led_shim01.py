@@ -16,6 +16,7 @@ ledshim.set_clear_on_exit()
 rise = (0,96,0) #green value
 fall = (128,0,0) #red value
 same = (0,0,0) #no lights
+none = (0,0,0) #no lights
 
 prevPrice = 0
 num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
@@ -23,7 +24,7 @@ num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
 # Create the pixel list
 pixel_list = []
 for num in range(num_of_pixels):
-  pixel_list.append(same) #no lights
+  pixel_list.append(none) #no lights
   #pixel_list.append(num)
   #pixel_list.append(random.choice(random_sample))
   
@@ -73,7 +74,7 @@ def get_BTC_price_in_euros(nebl_in_BTC):
 
 def changeTester(nebl_price_in_euros):
   global prevPrice
-  print('Nebl price in euros: ', nebl_price_in_euros)
+  #print('Nebl price in euros: ', nebl_price_in_euros)
   print('Previous price: ', prevPrice)
   diff = round(nebl_price_in_euros - prevPrice, 2) #need to do this, see note above
   print('Diff since last check: ', diff) #can comment this out later
@@ -91,6 +92,7 @@ def changeTester(nebl_price_in_euros):
     print('Price unchanged: ', diff)
   prevPrice = nebl_price_in_euros
   #print(pixel_list)
+  print()
   return pixel_list
 
 
