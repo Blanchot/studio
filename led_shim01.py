@@ -5,7 +5,7 @@ import time
 
 ledshim.set_clear_on_exit()
 
-rise = (0,32,0) #too bright
+rise = (0,96,0) #too bright
 fall = (128,0,0) #maybe too bright
 same = (0,0,255)
 
