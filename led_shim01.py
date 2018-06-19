@@ -93,16 +93,18 @@ def changeTester(nebl_price_in_euros):
     print('Price unchanged: ', diff)
   prevPrice = nebl_price_in_euros
   print(pixel_list)
+  return pixel_list
 
 
 while True:
   ledshim.clear()
+  get_NEBL_price_in_btc()
   for num in range(num_of_pixels):
     ledshim.set_pixel(num, *pixel_list[num]) # Code to try
     #print(num, *pixel_list[num]) # Test code
   ledshim.show()
-  #sleep(60) # checks once a minute
-  sleep(180) # checks every 3 minutes
+  sleep(60) # checks once a minute
+  #sleep(180) # checks every 3 minutes
   #sleep(300) # checks every 5 minutes
 
 
