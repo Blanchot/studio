@@ -7,9 +7,10 @@
 # https://stackoverflow.com/questions/14120340/python-error-in-basic-subtraction
 
 import ledshim
-#import random
 import requests, json
 from time import sleep
+
+ledshim.set_clear_on_exit()
 
 # RGB value tuples
 rise = (0,96,0) #green value
@@ -18,8 +19,6 @@ same = (0,0,0) #no lights
 
 prevPrice = 0
 num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
-
-random_sample = [rise, fall, same]
 
 # Create the pixel list
 pixel_list = []
@@ -72,7 +71,6 @@ def get_BTC_price_in_euros(nebl_in_BTC):
 
 
 
-
 def changeTester(nebl_price_in_euros):
   global prevPrice
   print('Nebl price in euros: ', nebl_price_in_euros)
@@ -92,8 +90,9 @@ def changeTester(nebl_price_in_euros):
     pixel_list.pop() # remove last value/tuple from the list
     print('Price unchanged: ', diff)
   prevPrice = nebl_price_in_euros
-  print(pixel_list)
+  #print(pixel_list)
   return pixel_list
+
 
 
 while True:
@@ -103,10 +102,9 @@ while True:
     ledshim.set_pixel(num, *pixel_list[num]) # Code to try
     #print(num, *pixel_list[num]) # Test code
   ledshim.show()
-  sleep(60) # checks once a minute
-  #sleep(180) # checks every 3 minutes
+  #sleep(60) # checks once a minute
+  sleep(180) # checks every 3 minutes
   #sleep(300) # checks every 5 minutes
-
 
 
 '''
