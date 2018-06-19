@@ -69,6 +69,7 @@ def test():
   ledshim.set_pixel(25,*rise)
   ledshim.set_pixel(26,*rise)
   ledshim.set_pixel(27,*rise)
+  ledshim.show()
 
 
 '''
