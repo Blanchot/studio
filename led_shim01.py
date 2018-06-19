@@ -6,7 +6,8 @@
 # See here for Decimal fix:
 # https://stackoverflow.com/questions/14120340/python-error-in-basic-subtraction
 
-import random
+import ledshim
+#import random
 import requests, json
 from time import sleep
 
