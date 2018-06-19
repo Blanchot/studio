@@ -15,8 +15,9 @@ ledshim.set_clear_on_exit()
 # RGB value tuples
 rise = (0,96,0) #green value
 fall = (128,0,0) #red value
-same = (0,0,0) #no lights
-none = (0,0,0) #no lights
+same = (0,0,0) #version 1 no lights
+same = (0,0,128) #version 1 no lights
+nada = (0,0,0) #no lights
 
 prevPrice = 0
 num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
@@ -24,7 +25,7 @@ num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
 # Create the pixel list
 pixel_list = []
 for num in range(num_of_pixels):
-  pixel_list.append(none) #no lights
+  pixel_list.append(nada) #no lights
   #pixel_list.append(num)
   #pixel_list.append(random.choice(random_sample))
   
