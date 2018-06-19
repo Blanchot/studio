@@ -9,7 +9,7 @@ rise = (0,96,0) #too bright
 fall = (128,0,0) #maybe too bright
 same = (0,0,255)
 
-print('Try: fallWalk(), riseWalk(), sameWalk()')
+print('Try: fallWalk(), riseWalk(), sameWalk(), test(), test2()')
 
 def reset():
   ledshim.clear()
@@ -40,6 +40,39 @@ def sameWalk():
   reset()
 
 def test():
+  ledshim.clear()
+  same = (0,0,0)
+  ledshim.set_pixel(0,*rise)
+  ledshim.set_pixel(1,*rise)
+  ledshim.set_pixel(2,*same)
+  ledshim.set_pixel(3,*rise)
+  ledshim.set_pixel(4,*rise)
+  ledshim.set_pixel(5,*rise)
+  ledshim.set_pixel(6,*same)
+  ledshim.set_pixel(7,*same)
+  ledshim.set_pixel(8,*fall)
+  ledshim.set_pixel(9,*fall)
+  ledshim.set_pixel(10,*fall) 
+  ledshim.set_pixel(11,*rise)
+  ledshim.set_pixel(12,*rise)
+  ledshim.set_pixel(13,*same)
+  ledshim.set_pixel(14,*rise)
+  ledshim.set_pixel(15,*rise)
+  ledshim.set_pixel(16,*rise)
+  ledshim.set_pixel(17,*same)
+  ledshim.set_pixel(18,*same)
+  ledshim.set_pixel(19,*fall)
+  ledshim.set_pixel(20,*fall)
+  ledshim.set_pixel(21,*fall)
+  ledshim.set_pixel(22,*rise)
+  ledshim.set_pixel(23,*rise)
+  ledshim.set_pixel(24,*same)
+  ledshim.set_pixel(25,*rise)
+  ledshim.set_pixel(26,*rise)
+  ledshim.set_pixel(27,*rise)
+  ledshim.show()
+
+def test2():
   ledshim.clear()
   ledshim.set_pixel(0,*rise)
   ledshim.set_pixel(1,*rise)
