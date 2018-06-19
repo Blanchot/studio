@@ -5,10 +5,38 @@ import time
 
 ledshim.set_clear_on_exit()
 
+rise = (0,255,0)
+fall = (255,0,0)
+same - (0,0,255)
+
+print('Try: fallWalk(), riseWalk(), sameWalk()')
+
+def fallWalk():
+  for x in range(ledshim.NUM_PIXELS):
+    ledshim.clear()
+    ledshim.set_pixel(x,*fall)
+    ledshim.show()
+    time.sleep(0.2)
+
+def riseWalk():
+  for x in range(ledshim.NUM_PIXELS):
+    ledshim.clear()
+    ledshim.set_pixel(x,*rise)
+    ledshim.show()
+    time.sleep(0.2)
+
+def sameWalk():
+  for x in range(ledshim.NUM_PIXELS):
+    ledshim.clear()
+    ledshim.set_pixel(x,*same)
+    ledshim.show()
+    time.sleep(0.2)
+
+
 '''
 CONSTANTS
-ledshim.NUM_PIXELS
-ledshim.DISPLAY_WIDTH # Same as NUM_PIXELS?
+ledshim.NUM_PIXELS # Returns 28
+ledshim.DISPLAY_WIDTH # Resturns 28... Same as NUM_PIXELS?
 
 FUNCTIONS
 ledshim.clear()
