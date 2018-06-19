@@ -7,7 +7,7 @@ ledshim.set_clear_on_exit()
 
 rise = (0,255,0)
 fall = (255,0,0)
-same - (0,0,255)
+same = (0,0,255)
 
 print('Try: fallWalk(), riseWalk(), sameWalk()')
 
