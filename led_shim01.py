@@ -8,8 +8,13 @@
 
 import ledshim
 import requests, json
-import random # for testing
+
+#import random # for testing
 from time import sleep
+
+import logging
+format_string = '%(levelname)s: %(asctime)s: %(message)s'
+logging.basicConfig(level=logging.DEBUG, filename='difflog.log', format=format_string)
 
 ledshim.set_clear_on_exit()
 ledshim.set_brightness(0.5)
@@ -94,6 +99,7 @@ def changeTester(nebl_price_in_euros):
     pixel_list.insert(0, rise_2)
     pixel_list.pop()
     print('Increased by: ', diff)
+    logging.info('Diff: {}'.format(diff))
   elif diff == -0.01: # value falls by 1 cent
     pixel_list.insert(0, fall_1)
     pixel_list.pop()
@@ -102,6 +108,7 @@ def changeTester(nebl_price_in_euros):
     pixel_list.insert(0, fall_2)
     pixel_list.pop()
     print('Decreased by: ', diff)
+    logging.info('Diff: {}'.format(diff))
   else: # value unchanged
     pixel_list.insert(0, same)
     pixel_list.pop()
