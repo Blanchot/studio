@@ -29,7 +29,7 @@ same = (0,0,96) #version 2 with lights
 nada = (0,0,0) #no lights
 
 threshold = .03 #threshold for determining small or large rise or fall 
-logging.info('Start log with pos/neg threshold: {}'.format(threshold))
+logging.info('Start with pos/neg threshold: {}'.format(threshold))
 prevPrice = 0
 num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
 
