@@ -14,7 +14,7 @@ from time import sleep
 
 import logging
 format_string = '%(levelname)s: %(asctime)s: %(message)s'
-logging.basicConfig(level=logging.DEBUG, filename='difflog.log', format=format_string)
+logging.basicConfig(level=logging.INFO, filename='difflog.log', format=format_string)
 
 ledshim.set_clear_on_exit()
 ledshim.set_brightness(0.5)
