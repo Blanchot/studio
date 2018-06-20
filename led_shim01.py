@@ -84,7 +84,7 @@ def get_BTC_price_in_euros(nebl_in_BTC):
 
 
 ''' 
-# .02 DIFF FOR LARGE RISE OR FALL 
+# .02 OR LESS DIFF FOR LARGE RISE OR FALL 
 def changeTester(nebl_price_in_euros):
   global prevPrice
   #print('Nebl price in euros: ', nebl_price_in_euros)
@@ -120,7 +120,7 @@ def changeTester(nebl_price_in_euros):
   return pixel_list
 
 '''
-# .03 DIFF FOR LARGE RISE OR FALL 
+# .03 OR MORE DIFF FOR LARGE RISE OR FALL 
 def changeTester(nebl_price_in_euros):
   global prevPrice
   #print('Nebl price in euros: ', nebl_price_in_euros)
@@ -136,7 +136,7 @@ def changeTester(nebl_price_in_euros):
     pixel_list.insert(0, rise_2)
     pixel_list.pop()
     print('Large rise by: ', diff)
-    logging.info('Diff: {}'.format(diff))
+    logging.info('Large rise by: {}'.format(diff))
   elif diff < 0 and diff >= -0.02: # value falls by 1 or 2 cents
     pixel_list.insert(0, fall_1)
     pixel_list.pop()
@@ -145,7 +145,7 @@ def changeTester(nebl_price_in_euros):
     pixel_list.insert(0, fall_2)
     pixel_list.pop()
     print('Large fall by: ', diff)
-    logging.info('Diff: {}'.format(diff))
+    logging.info('Large fall by: {}'.format(diff))
   else: # value unchanged
     pixel_list.insert(0, same)
     pixel_list.pop()
