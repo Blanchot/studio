@@ -20,7 +20,7 @@ ledshim.set_clear_on_exit()
 ledshim.set_brightness(0.5)
 
 # RGB value tuples
-rise_1 = (0,64,0) #green value (was 96 toning it down even further to 64)
+rise_1 = (0,80,0) #green value (was 96 toning it down even further to 80)
 rise_2 = (0,255,0)
 fall_1 = (96,0,0) #red value
 fall_2 = (255,0,0)
