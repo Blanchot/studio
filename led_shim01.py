@@ -112,7 +112,7 @@ def changeTester(nebl_price_in_euros):
   return pixel_list
 
 
-'''
+
 while True:
   ledshim.clear()
   get_NEBL_price_in_btc()
@@ -123,8 +123,9 @@ while True:
   #sleep(60) # checks once a minute
   sleep(180) # checks every 3 minutes
   #sleep(300) # checks every 5 minutes
-'''
 
+
+'''
 # For testing
 def testCode(bright_val):
   ledshim.set_brightness(bright_val)
@@ -136,6 +137,7 @@ def testCode(bright_val):
   for num in range(num_of_pixels):
     ledshim.set_pixel(num, *pixel_list[num])
   ledshim.show()
+'''
 
 '''
 #Pimoroni test.py code
