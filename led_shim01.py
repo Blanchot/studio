@@ -20,7 +20,7 @@ ledshim.set_clear_on_exit()
 ledshim.set_brightness(0.5)
 
 # RGB value tuples
-rise_1 = (0,96,0) #green value
+rise_1 = (0,64,0) #green value (was 96 toning it down even further to 64)
 rise_2 = (0,255,0)
 fall_1 = (96,0,0) #red value
 fall_2 = (255,0,0)
@@ -28,8 +28,12 @@ fall_2 = (255,0,0)
 same = (0,0,96) #version 2 with lights
 nada = (0,0,0) #no lights
 
+# Setting difference threshold and wait time
 threshold = .03 #threshold for determining small or large rise or fall 
 logging.info('Start with pos/neg threshold: {}'.format(threshold))
+wait_secs = 180 #number of seconds to sleep between api calls
+logging.info('Delay: {} seconds'.format(wait_secs))
+
 prevPrice = 0
 num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
 
@@ -204,9 +208,8 @@ while True:
     ledshim.set_pixel(num, *pixel_list[num])
     #print(num, *pixel_list[num]) # Test code
   ledshim.show()
-  #sleep(60) # checks once a minute
-  sleep(180) # checks every 3 minutes
-  #sleep(300) # checks every 5 minutes
+  sleep(wait_secs)
+
 
 
 '''
