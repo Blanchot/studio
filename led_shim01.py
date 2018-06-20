@@ -8,6 +8,7 @@
 
 import ledshim
 import requests, json
+import random # for testing
 from time import sleep
 
 ledshim.set_clear_on_exit()
@@ -15,7 +16,7 @@ ledshim.set_clear_on_exit()
 # RGB value tuples
 rise = (0,96,0) #green value
 fall = (128,0,0) #red value
-same = (0,0,0) #version 1 no lights
+#same = (0,0,0) #version 1 no lights
 same = (0,0,128) #version 1 no lights
 nada = (0,0,0) #no lights
 
@@ -28,11 +29,13 @@ for num in range(num_of_pixels):
   pixel_list.append(nada) #no lights
   #pixel_list.append(num)
   #pixel_list.append(random.choice(random_sample))
-  
 
 # API's Used
 URL_1 = 'https://api.binance.com/api/v1/ticker/24hr?symbol=NEBLBTC' # NEBL price in BTC
 URL_2 = 'https://api.coinbase.com/v2/prices/spot?currency=EUR' #Convert BTC to Euro
+
+
+
 
 # Get current Binance price for NEBL (in BTC)
 def get_NEBL_price_in_btc():
@@ -97,18 +100,30 @@ def changeTester(nebl_price_in_euros):
   return pixel_list
 
 
-
+'''
 while True:
   ledshim.clear()
   get_NEBL_price_in_btc()
   for num in range(num_of_pixels):
-    ledshim.set_pixel(num, *pixel_list[num]) # Code to try
+    ledshim.set_pixel(num, *pixel_list[num])
     #print(num, *pixel_list[num]) # Test code
   ledshim.show()
   #sleep(60) # checks once a minute
   sleep(180) # checks every 3 minutes
   #sleep(300) # checks every 5 minutes
+'''
 
+# For testing
+def testCode(bright_val):
+  ledshim.set_brightness(bright_val)
+  random_sample = [rise, fall, same]
+  pixel_list = []
+  for num in range(num_of_pixels): # seed list with random values
+    pixel_list.append(random.choice(random_sample))
+  ledshim.clear()
+  for num in range(num_of_pixels):
+    ledshim.set_pixel(num, *pixel_list[num])
+  ledshim.show()
 
 '''
 #Pimoroni test.py code
