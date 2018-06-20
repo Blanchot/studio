@@ -12,12 +12,15 @@ import random # for testing
 from time import sleep
 
 ledshim.set_clear_on_exit()
+ledshim.set_brightness(0.5)
 
 # RGB value tuples
-rise = (0,96,0) #green value
-fall = (128,0,0) #red value
+rise_1 = (0,96,0) #green value
+rise_2 = (0,255,0)
+fall_1 = (96,0,0) #red value
+fall_2 = (255,0,0)
 #same = (0,0,0) #version 1 no lights
-same = (0,0,128) #version 1 no lights
+same = (0,0,96) #version 2 with lights
 nada = (0,0,0) #no lights
 
 prevPrice = 0
@@ -82,17 +85,26 @@ def changeTester(nebl_price_in_euros):
   print('Previous price: ', prevPrice)
   diff = round(nebl_price_in_euros - prevPrice, 2) #need to do this, see note above
   print('Diff since last check: ', diff) #can comment this out later
-  if diff >= 0.01: # value rising
-    pixel_list.insert(0, rise)
-    pixel_list.pop() # remove last value/tuple from the list
+  
+  if diff == 0.01: # value rises by 1 cent
+    pixel_list.insert(0, rise_1)
+    pixel_list.pop()
     print('Increased by: ', diff)
-  elif diff <= -0.01: # value falling
-    pixel_list.insert(0, fall)
-    pixel_list.pop() # remove last value/tuple from the list
+  elif diff >= 0.02: # value rises by more than 1 cent
+    pixel_list.insert(0, rise_2)
+    pixel_list.pop()
+    print('Increased by: ', diff)
+  elif diff == -0.01: # value falls by 1 cent
+    pixel_list.insert(0, fall_1)
+    pixel_list.pop()
+    print('Decreased by: ', diff)
+  elif diff <= -0.02: # value falls by more than 1 cent
+    pixel_list.insert(0, fall_2)
+    pixel_list.pop()
     print('Decreased by: ', diff)
   else: # value unchanged
     pixel_list.insert(0, same)
-    pixel_list.pop() # remove last value/tuple from the list
+    pixel_list.pop()
     print('Price unchanged: ', diff)
   prevPrice = nebl_price_in_euros
   #print(pixel_list)
@@ -116,7 +128,7 @@ while True:
 # For testing
 def testCode(bright_val):
   ledshim.set_brightness(bright_val)
-  random_sample = [rise, fall, same]
+  random_sample = [rise_1, rise_2, fall_1, fall_2, same]
   pixel_list = []
   for num in range(num_of_pixels): # seed list with random values
     pixel_list.append(random.choice(random_sample))
