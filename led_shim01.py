@@ -28,6 +28,8 @@ fall_2 = (255,0,0)
 same = (0,0,96) #version 2 with lights
 nada = (0,0,0) #no lights
 
+threshold = .03 #threshold for determining small or large rise or fall 
+logging.info('Start log with pos/neg threshold: {}'.format(threshold))
 prevPrice = 0
 num_of_pixels = 28 # Can replace this with: ledshim.NUM_PIXELS
 
@@ -83,8 +85,9 @@ def get_BTC_price_in_euros(nebl_in_BTC):
     print("Error querying Coinbase API")
 
 
+
 ''' 
-# .02 OR LESS DIFF FOR LARGE RISE OR FALL 
+# .02 OR MORE DIFF FOR LARGE RISE OR FALL 
 def changeTester(nebl_price_in_euros):
   global prevPrice
   #print('Nebl price in euros: ', nebl_price_in_euros)
@@ -119,7 +122,8 @@ def changeTester(nebl_price_in_euros):
   print()
   return pixel_list
 
-'''
+
+
 # .03 OR MORE DIFF FOR LARGE RISE OR FALL 
 def changeTester(nebl_price_in_euros):
   global prevPrice
@@ -142,6 +146,42 @@ def changeTester(nebl_price_in_euros):
     pixel_list.pop()
     print('Small fall by: ', diff)
   elif diff <= -0.03: # value falls by 3 or more cents
+    pixel_list.insert(0, fall_2)
+    pixel_list.pop()
+    print('Large fall by: ', diff)
+    logging.info('Large fall by: {}'.format(diff))
+  else: # value unchanged
+    pixel_list.insert(0, same)
+    pixel_list.pop()
+    print('Price unchanged: ', diff)
+  prevPrice = nebl_price_in_euros
+  #print(pixel_list)
+  print()
+  return pixel_list
+'''
+
+# USING THRESHOLD VARIABLE FOR DIFF ON LARGE RISE OR FALL 
+def changeTester(nebl_price_in_euros):
+  global prevPrice
+  #print('Nebl price in euros: ', nebl_price_in_euros)
+  print('Previous price: ', prevPrice)
+  diff = round(nebl_price_in_euros - prevPrice, 2) #need to do this, see note above
+  print('Diff since last check: ', diff) #can comment this out later
+  
+  if diff > 0 and diff < threshold: # value rises: > 0 and < than threshold
+    pixel_list.insert(0, rise_1)
+    pixel_list.pop()
+    print('Small rise by: ', diff)
+  elif diff >= threshold: # value LARGE RISE: > or = to threshold
+    pixel_list.insert(0, rise_2)
+    pixel_list.pop()
+    print('Large rise by: ', diff)
+    logging.info('Large rise by: {}'.format(diff))
+  elif diff < 0 and diff > -threshold: # value falls: < 0 and > -(threshold)
+    pixel_list.insert(0, fall_1)
+    pixel_list.pop()
+    print('Small fall by: ', diff)
+  elif diff <= -0.03: # value LARGE FALL: < or = to threshold  
     pixel_list.insert(0, fall_2)
     pixel_list.pop()
     print('Large fall by: ', diff)
