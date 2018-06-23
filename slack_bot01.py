@@ -21,12 +21,12 @@ for user in user_list.get('members'):
 
 # Start connection
 if slack_client.rtm_connect():
-  print "Connected!"
+  print("Connected!")
   
   while True:
     for message in slack_client.rtm_read():
       if 'text' in message and message['text'].startswith("<@%s>" % slack_user_id):
-        print "Message received: %s" % json.dumps(message, indent=2)
+        print("Message received: %s" % json.dumps(message, indent=2))
         message_text = message['text'].\
           split("<@%s>" % slack_user_id)[1].\
           strip()
@@ -51,5 +51,6 @@ if slack_client.rtm_connect():
             as_user=True)
 
   time.sleep(1)
+
 
 
