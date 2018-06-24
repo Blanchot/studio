@@ -1,8 +1,10 @@
 # btc_01 a BTC watcher for boreas
 # led_shim01.py code modified and extended
-# beta 1: checking led_shim code works on boreas
+# beta 2: initial btc code
+# four letter phat functions: http://docs.pimoroni.com/fourletterphat/
 
 import ledshim
+import fourletterphat
 import requests, json
 
 #import random # for testing
@@ -15,7 +17,7 @@ logging.basicConfig(level=logging.INFO, filename='difflog.log', format=format_st
 ledshim.set_clear_on_exit()
 ledshim.set_brightness(0.5)
 
-# RGB value tuples
+# RGB value tuples for ledshim
 rise_1 = (0,84,0) #green value (was 96 toning it down slightly to 84)
 rise_2 = (0,255,0)
 fall_1 = (96,0,0) #red value
@@ -41,58 +43,36 @@ for num in range(num_of_pixels):
   #pixel_list.append(random.choice(random_sample))
 
 # API's Used
-URL_1 = 'https://api.binance.com/api/v1/ticker/24hr?symbol=NEBLBTC' # NEBL price in BTC
-URL_2 = 'https://api.coinbase.com/v2/prices/spot?currency=EUR' #Convert BTC to Euro
+URL = 'https://api.coinbase.com/v2/prices/spot?currency=USD'
+#URL_1 = 'https://api.binance.com/api/v1/ticker/24hr?symbol=NEBLBTC' # NEBL price in BTC
+#URL_2 = 'https://api.coinbase.com/v2/prices/spot?currency=EUR' #Convert BTC to Euro
 
-
-
-# Get current Binance price for NEBL (in BTC)
-def get_NEBL_price_in_btc():
+# Get current price for 1 bitcoin in USD for Four Letter Display
+def get_BTC_price_in_USD():
   try:
-    r = requests.get(URL_1)
-    nebl_in_BTC = json.loads(r.text)['lastPrice']
+    r = requests.get(URL)
+    BTC_in_USD = json.loads(r.text)['data']['amount']
     
-    #convert to float
-    nebl_in_BTC = float(nebl_in_BTC)
     
-    # NEBL price in BTC
-    print('1 NEBL (BTC): ',nebl_in_BTC)
+    #convert to float and then round to int
+    BTC_in_USD = float(BTC_in_USD)
+    BTC_in_USD = round(BTC_in_USD)
     
-    # send nebl_in_BTC to Euro converter at Coinbase
-    eurPrice = get_BTC_price_in_euros(nebl_in_BTC)
+    print('1 bitcoin): ',BTC_in_USD)
+    return BTC_in_USD
     
-  except requests.ConnectionError:
-    print("Error querying Binance API")
-
-
-
-# Convert BTC to Euro and send to changeTester
-def get_BTC_price_in_euros(nebl_in_BTC):
-  try:
-    r = requests.get(URL_2)
-    btc_Euro_exchange = json.loads(r.text)['data']['amount']
-    
-    # NEBL price in EUR
-    nebl_price_in_euros = nebl_in_BTC * float(btc_Euro_exchange)
-    nebl_price_in_euros = round(nebl_price_in_euros,2) #round to two decimal places
-    print('1 NEBL (EUR): {:0.2f}'.format(nebl_price_in_euros))
-    
-    # Send to changeTester rounded to 2 decimal places
-    nebl_price_in_euros = round(nebl_price_in_euros,2)
-    changeTester(nebl_price_in_euros)
   except requests.ConnectionError:
     print("Error querying Coinbase API")
 
 
 
 
-# USING THRESHOLD VARIABLE FOR DIFF ON LARGE RISE OR FALL 
-def changeTester(nebl_price_in_euros):
+# Prepare Rise and Fall Timeline for Ledshim
+def make_rise_fall_list(BTC_in_USD):
   global prevPrice
-  #print('Nebl price in euros: ', nebl_price_in_euros)
   print('Previous price: ', prevPrice)
-  diff = round(nebl_price_in_euros - prevPrice, 2) #need to do this, see note above
-  print('Diff since last check: ', diff) #can comment this out later
+  diff = BTC_in_USD - prevPrice) # ints not floats so no need to: round(value,2)
+  print('Diff since last check: ', diff) # can comment this out later
   
   if diff > 0 and diff < threshold: # value rises: > 0 and < than threshold
     pixel_list.insert(0, rise_1)
@@ -116,7 +96,7 @@ def changeTester(nebl_price_in_euros):
     pixel_list.insert(0, same)
     pixel_list.pop()
     print('Price unchanged: ', diff)
-  prevPrice = nebl_price_in_euros
+  prevPrice = BTC_in_USD
   #print(pixel_list)
   print()
   return pixel_list
@@ -125,11 +105,16 @@ def changeTester(nebl_price_in_euros):
 
 
 while True:
+  fourletterphat.clear()
   ledshim.clear()
-  get_NEBL_price_in_btc()
+  
+  BTC_in_USD = get_BTC_price_in_USD()
+  fourletterphat.print_number_str(BTC_in_USD)
+  pixel_list = make_rise_fall_list(BTC_in_USD)
   for num in range(num_of_pixels):
     ledshim.set_pixel(num, *pixel_list[num])
-    #print(num, *pixel_list[num]) # Test code
+  
+  fourletterphat.show()
   ledshim.show()
   sleep(wait_secs)
 
