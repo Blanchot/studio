@@ -27,9 +27,10 @@ same = (0,0,96) #version 2 with lights
 nada = (0,0,0) #no lights
 
 # Setting difference threshold and wait time
-threshold = 10 #threshold for determining small or large rise or fall 
+threshold = 20 #threshold for determining small or large rise or fall 
+nochange = 2 #lower limit
 logging.info('Start: Large threshold: ${}'.format(threshold))
-logging.info('Same = more or less than $1')
+logging.info('Same = plus or minus ${}'.format(nochange))
 wait_secs = 180 #number of seconds to sleep between api calls
 logging.info('Delay: {} seconds'.format(wait_secs))
 
@@ -75,7 +76,7 @@ def make_rise_fall_list(BTC_in_USD):
   diff = (BTC_in_USD - prevPrice) # ints not floats so no need to: round(value,2)
   print('Diff since last check: ', diff) # can comment this out later
   
-  if diff > 1 and diff < threshold: # value rises: > 0 and < than threshold
+  if diff > nochange and diff < threshold: # value rises: > 0 and < than threshold
     pixel_list.insert(0, rise_1)
     pixel_list.pop()
     print('Small rise by: ', diff)
@@ -84,7 +85,7 @@ def make_rise_fall_list(BTC_in_USD):
     pixel_list.pop()
     print('Large rise by: ', diff)
     logging.info('Large rise by: {}'.format(diff))
-  elif diff < -1 and diff > -threshold: # value falls: < 0 and > -(threshold)
+  elif diff < -nochange and diff > -threshold: # value falls: < 0 and > -(threshold)
     pixel_list.insert(0, fall_1)
     pixel_list.pop()
     print('Small fall by: ', diff)
