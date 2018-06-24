@@ -88,7 +88,7 @@ def make_rise_fall_list(BTC_in_USD):
     pixel_list.insert(0, fall_1)
     pixel_list.pop()
     print('Small fall by: ', diff)
-  elif diff <= -threshold # value LARGE FALL: < or = to threshold  
+  elif diff <= -threshold: # value LARGE FALL: < or = to threshold  
     pixel_list.insert(0, fall_2)
     pixel_list.pop()
     print('Large fall by: ', diff)
