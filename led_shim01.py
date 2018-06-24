@@ -185,7 +185,7 @@ def changeTester(nebl_price_in_euros):
     pixel_list.insert(0, fall_1)
     pixel_list.pop()
     print('Small fall by: ', diff)
-  elif diff <= -0.03: # value LARGE FALL: < or = to threshold  
+  elif diff <= -threshold: # value LARGE FALL: < or = to threshold  
     pixel_list.insert(0, fall_2)
     pixel_list.pop()
     print('Large fall by: ', diff)
