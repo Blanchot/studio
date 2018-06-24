@@ -27,7 +27,7 @@ same = (0,0,96) #version 2 with lights
 nada = (0,0,0) #no lights
 
 # Setting difference threshold and wait time
-threshold = .03 #threshold for determining small or large rise or fall 
+threshold = 3 #threshold for determining small or large rise or fall 
 logging.info('Start with pos/neg threshold: {}'.format(threshold))
 wait_secs = 180 #number of seconds to sleep between api calls
 logging.info('Delay: {} seconds'.format(wait_secs))
