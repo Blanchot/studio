@@ -71,7 +71,7 @@ def get_BTC_price_in_USD():
 def make_rise_fall_list(BTC_in_USD):
   global prevPrice
   print('Previous price: ', prevPrice)
-  diff = BTC_in_USD - prevPrice) # ints not floats so no need to: round(value,2)
+  diff = (BTC_in_USD - prevPrice) # ints not floats so no need to: round(value,2)
   print('Diff since last check: ', diff) # can comment this out later
   
   if diff > 0 and diff < threshold: # value rises: > 0 and < than threshold
