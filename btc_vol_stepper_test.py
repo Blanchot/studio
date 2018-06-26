@@ -9,13 +9,12 @@ import time
 import sys
 import RPi.GPIO as GPIO
 
-
-motor_pas = 1 # not sure what this is for?
-motor = 0 # motor counter
+wait = 0.01 # time to pause between motor steps
+pos = 1 # values 0 to 8
+count = 0 # motor counter
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-
 
 # motor setup
 GPIO.setup(18, GPIO.OUT)
@@ -23,77 +22,77 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
-print('Try motor_steps_8(value)')
+print('Use: steps(num)')
 
-def motor_step_8 (p):
-  if p==0:
+def step(pos):
+  if pos==0:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if p==1:
+  if pos==1:
     GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if p==2:
+  if pos==2:
     GPIO.output(18,1)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if p==3:
+  if pos==3:
     GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if p==4:
+  if pos==4:
     GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,1)
     GPIO.output(25,0)
-  if p==5:
+  if pos==5:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,1)
     GPIO.output(25,0)
-  if p==6:
+  if pos==6:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,1)
     GPIO.output(25,1)
-  if p==7:
+  if pos==7:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,1)
-  if p==8:
+  if pos==8:
     GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,1)
 
 
-def motor_steps_8(value):
-  #print(value)
-  global motor_pas
-  global motor # counter
-  if(value>0): #reversed original code- was if(value<0):
-    for i in range (0,abs(value)):
-      motor_step_8(motor_pas)
-      time.sleep(0.01)
-      motor+=1 #add 1 to counter (reversed)
-      motor_pas+=1
-      if(motor_pas>=9):
-        motor_pas=1;
+def steps(num):
+  #print(num)
+  global pos # current position
+  global count # current counter
+  if value > 0: #reversed original code- was if(value<0):
+    for i in range (0, abs(num)):
+      step(pos)
+      time.sleep(wait)
+      count += 1 #add 1 to counter (reversed)
+      pos += 1 #add 1 to pos
+      if(pos >= 9):
+        pos = 1;
   else:
-    for i in range (0,abs(value)):
-      m0step_8(motor_pas)
-      time.sleep(0.01)
-      motor-=1 #subtract 1 from counter (reversed)
-      if(motor_pas==1):
-        motor_pas=9;
-      motor_pas-=1
-  motor_step_8(0)
+    for i in range (0, abs(num)):
+      step(pos)
+      time.sleep(wait)
+      count -= 1 #subtract 1 from counter (reversed)
+      if(pos == 1):
+        pos = 9;
+      pos -= 1
+  step(0) # Turn motor off
 
 
 #GPIO.cleanup()
