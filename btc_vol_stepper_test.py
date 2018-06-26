@@ -23,7 +23,7 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
-print('Try ')
+print('Try motor_steps_8(value)')
 
 def motor_step_8 (p):
   if p==0:
@@ -81,7 +81,7 @@ def motor_steps_8(value):
     for i in range (0,abs(value)):
       motor_step_8(motor_pas)
       time.sleep(0.01)
-      m0+=1 #add 1 to counter (reversed)
+      motor+=1 #add 1 to counter (reversed)
       motor_pas+=1
       if(motor_pas>=9):
         motor_pas=1;
@@ -89,7 +89,7 @@ def motor_steps_8(value):
     for i in range (0,abs(value)):
       m0step_8(motor_pas)
       time.sleep(0.01)
-      m0-=1 #subtract 1 from counter (reversed)
+      motor-=1 #subtract 1 from counter (reversed)
       if(motor_pas==1):
         motor_pas=9;
       motor_pas-=1
