@@ -23,7 +23,7 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
-print('Try motor_steps_8(value)')
+print('Try ')
 
 def motor_step_8 (p):
   if p==0:
@@ -96,7 +96,7 @@ def motor_steps_8(value):
   motor_step_8(0)
 
 
-GPIO.cleanup()
+#GPIO.cleanup()
 
 
 
