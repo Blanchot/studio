@@ -147,6 +147,9 @@ while True:
     print(vol_time)
     print('5 minute volume: ', volume3)
     logging.info('{}: {}'.format(vol_time, volume3))
+    time.sleep(65) # wait a bit more than a minute to escape if = true
+  else:
+    time.sleep(5)
 
 
 '''
