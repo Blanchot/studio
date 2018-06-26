@@ -99,6 +99,7 @@ def get_BTC_5_min_volume():
     #volume2 = json.loads(r.text)['Data'][1]['volumefrom']
     time3 = json.loads(r.text)['Data'][2]['time']
     volume3 = json.loads(r.text)['Data'][2]['volumefrom']
+    return time3, volume3
     #time4 = json.loads(r.text)['Data'][3]['time']
     #volume4 = json.loads(r.text)['Data'][3]['volumefrom']
     
