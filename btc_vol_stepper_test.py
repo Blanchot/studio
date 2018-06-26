@@ -77,7 +77,7 @@ def steps(num):
   #print(num)
   global pos # current position
   global count # current counter
-  if value > 0: #reversed original code- was if(value<0):
+  if num > 0: #reversed original code- was if(value<0):
     for i in range (0, abs(num)):
       step(pos)
       time.sleep(wait)
