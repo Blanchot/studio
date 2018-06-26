@@ -44,10 +44,10 @@ for num in range(num_of_pixels):
   #pixel_list.append(num)
   #pixel_list.append(random.choice(random_sample))
 
-# API's Used
+# API Used
 URL = 'https://api.coinbase.com/v2/prices/spot?currency=USD'
-#URL_1 = 'https://api.binance.com/api/v1/ticker/24hr?symbol=NEBLBTC' # NEBL price in BTC
-#URL_2 = 'https://api.coinbase.com/v2/prices/spot?currency=EUR' #Convert BTC to Euro
+
+
 
 # Get current price for 1 bitcoin in USD for Four Letter Display
 def get_BTC_price_in_USD():
@@ -65,7 +65,6 @@ def get_BTC_price_in_USD():
     
   except requests.ConnectionError:
     print("Error querying Coinbase API")
-
 
 
 
@@ -105,7 +104,6 @@ def make_rise_fall_list(BTC_in_USD):
 
 
 
-
 while True:
   fourletterphat.clear()
   ledshim.clear()
@@ -119,6 +117,5 @@ while True:
   fourletterphat.show()
   ledshim.show()
   sleep(wait_secs)
-
 
 
