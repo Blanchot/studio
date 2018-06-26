@@ -6,12 +6,11 @@ import datetime
 import requests, json
 import time
 
-'''
 import logging
 format_string = '%(levelname)s: %(message)s'
 logging.basicConfig(level=logging.INFO, filename='BTC_volume_log.log', format=format_string)
 logging.info('Start BTC Volume Log')
-'''
+
 
 interval_List = (2,7,12,17,22,27,32,37,42,47,52,57) #times to check- 2 min after each 5 min interval
 
