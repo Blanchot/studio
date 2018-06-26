@@ -31,42 +31,42 @@ def step(pos):
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if pos==1:
+  elif pos==1:
     GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if pos==2:
+  elif pos==2:
     GPIO.output(18,1)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if pos==3:
+  elif pos==3:
     GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
-  if pos==4:
+  elif pos==4:
     GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,1)
     GPIO.output(25,0)
-  if pos==5:
+  elif pos==5:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,1)
     GPIO.output(25,0)
-  if pos==6:
+  elif pos==6:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,1)
     GPIO.output(25,1)
-  if pos==7:
+  elif pos==7:
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,1)
-  if pos==8:
+  elif pos==8:
     GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
@@ -84,14 +84,14 @@ def steps(num):
       count += 1 #add 1 to counter (reversed)
       pos += 1 #add 1 to pos
       if(pos >= 9):
-        pos = 1;
+        pos = 1
   else:
     for i in range (0, abs(num)):
       step(pos)
       time.sleep(wait)
       count -= 1 #subtract 1 from counter (reversed)
       if(pos == 1):
-        pos = 9;
+        pos = 9
       pos -= 1
   step(0) # Turn motor off
 
