@@ -9,7 +9,7 @@ import time
 import logging
 format_string = '%(levelname)s: %(message)s'
 logging.basicConfig(level=logging.INFO, filename='BTC_volume_log.log', format=format_string)
-logging.info('Start BTC Volume Log')
+logging.info('Begin 5 Minute BTC Volume Log')
 
 
 interval_List = (2,7,12,17,22,27,32,37,42,47,52,57) #times to check- 2 min after each 5 min interval
@@ -146,7 +146,7 @@ while True:
     vol_time = convert_seconds(time3)
     print(vol_time)
     print('5 minute volume: ', volume3)
-    logging.info('5 min start {}: {}'.format(vol_time, volume3))
+    logging.info('From: {}, Vol: {}'.format(vol_time, volume3))
     time.sleep(65) # wait a bit more than a minute to escape if = true
   else:
     time.sleep(5)
