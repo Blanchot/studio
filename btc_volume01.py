@@ -146,7 +146,7 @@ while True:
     vol_time = convert_seconds(time3)
     print(vol_time)
     print('5 minute volume: ', volume3)
-    logging.info('{}: {}'.format(vol_time, volume3))
+    logging.info('5 min start {}: {}'.format(vol_time, volume3))
     time.sleep(65) # wait a bit more than a minute to escape if = true
   else:
     time.sleep(5)
