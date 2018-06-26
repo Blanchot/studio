@@ -4,7 +4,7 @@
 
 import datetime
 import requests, json
-from time import sleep
+import time
 
 '''
 import logging
