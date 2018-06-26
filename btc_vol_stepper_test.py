@@ -9,7 +9,7 @@ import time
 import sys
 import RPi.GPIO as GPIO
 
-wait = 0.01 # time to pause between motor steps
+wait = 0.1 # time to pause between motor steps
 pos = 1 # values 0 to 8
 count = 0 # motor counter
 
@@ -24,6 +24,7 @@ GPIO.setup(25, GPIO.OUT)
 
 print('Use: steps(num)')
 
+# Why not elif?
 def step(pos):
   if pos==0:
     GPIO.output(18,0)
