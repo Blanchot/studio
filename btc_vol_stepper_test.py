@@ -9,7 +9,7 @@ import time
 import sys
 import RPi.GPIO as GPIO
 
-wait = 1 # time to pause between motor steps
+wait = .01 # time to pause between motor steps
 pos = 1 # values 0 to 8
 count = 0 # motor counter
 
@@ -24,58 +24,57 @@ GPIO.setup(25, GPIO.OUT)
 
 print('Use: steps(num)')
 
-# Why
 def step(pos):
   if pos==0:
-    print('Pos: 0')
+    #print('Pos: 0')
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,0)
   elif pos==1:
-    print('Pos: 1')
+    #print('Pos: 1')
     GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,0)
   elif pos==2:
-    print('Pos: 2')
+    #print('Pos: 2')
     GPIO.output(18,1)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
   elif pos==3:
-    print('Pos: 3')
+    #print('Pos: 3')
     GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
   elif pos==4:
-    print('Pos: 4')
+    #print('Pos: 4')
     GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,1)
     GPIO.output(25,0)
   elif pos==5:
-    print('Pos: 5')
+    #print('Pos: 5')
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,1)
     GPIO.output(25,0)
   elif pos==6:
-    print('Pos: 6')
+    #print('Pos: 6')
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,1)
     GPIO.output(25,1)
   elif pos==7:
-    print('Pos: 7')
+    #print('Pos: 7')
     GPIO.output(18,0)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,1)
   elif pos==8:
-    print('Pos: 8')
+    #print('Pos: 8')
     GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
