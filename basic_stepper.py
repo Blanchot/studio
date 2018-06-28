@@ -14,8 +14,8 @@ pos = 1 # values 0 to 8
 count = 0 # motor counter
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(True)
-#GPIO.setwarnings(False)
+#GPIO.setwarnings(True)
+GPIO.setwarnings(False)
 
 
 # pins setup
