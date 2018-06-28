@@ -82,7 +82,32 @@ def step8(pos):
     GPIO.output(24,0)
     GPIO.output(25,1)
 
+def steps8(num): #for oounterclockwise motor rotation
+  global pos # current position
+  global count # current counter
+  if num > 0:
+    for i in range (0, abs(num)):
+      step8(pos)
+      time.sleep(wait)
+      count += 1 #add 1 to counter
+      #--- Begin code that determines direction of rotation
+      if(pos == 1):
+        pos = 9
+      pos -= 1 #subtract 1 from motor pos
+      #--- End code that determines direction of rotation
+  else:
+    for i in range (0, abs(num)):
+      step8(pos)
+      time.sleep(wait)
+      count -= 1 #subtract 1 from counter
+      #--- Begin code that determines direction of rotation
+      pos += 1 # add 1 to motor pos
+      if(pos >= 9):
+        pos = 1
+      #--- End code that determines direction of rotation
+  step8(0) # Turn motor off
 
+'''
 def steps8(num): #for oounterclockwise rotation
   global pos # current position
   global count # current counter
@@ -107,7 +132,7 @@ def steps8(num): #for oounterclockwise rotation
       pos -= 1 #subtract 1 from motor pos
       #--- End code that determines direction of rotation   
   step8(0) # Turn motor off
-
+'''
 #GPIO.cleanup()
 
 
