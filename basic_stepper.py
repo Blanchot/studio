@@ -17,7 +17,6 @@ GPIO.setmode(GPIO.BCM)
 #GPIO.setwarnings(True)
 GPIO.setwarnings(False)
 
-
 # pins setup
 GPIO.setup(18, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
@@ -82,7 +81,38 @@ def step8(pos):
     GPIO.output(24,0)
     GPIO.output(25,1)
 
-'''
+def step4(pos):
+  if pos==0:
+    #print('Pos: 0')
+    GPIO.output(18,0)
+    GPIO.output(23,0)
+    GPIO.output(24,0)
+    GPIO.output(25,0)
+  elif pos==1:
+    #print('Pos: 1')
+    GPIO.output(18,1)
+    GPIO.output(23,0)
+    GPIO.output(24,0)
+    GPIO.output(25,0)
+  elif pos==2:
+    #print('Pos: 2')
+    GPIO.output(18,0)
+    GPIO.output(23,1)
+    GPIO.output(24,0)
+    GPIO.output(25,0)
+  elif pos==3:
+    #print('Pos: 3')
+    GPIO.output(18,0)
+    GPIO.output(23,0)
+    GPIO.output(24,1)
+    GPIO.output(25,0)
+  elif pos==4:
+    #print('Pos: 4')
+    GPIO.output(18,0)
+    GPIO.output(23,0)
+    GPIO.output(24,0)
+    GPIO.output(25,1)
+
 def steps8(num): # USE FOR 8 STEP COUNTER-CLOCKWISE MOTOR ROTATION
   global pos # current position
   global count # current counter
@@ -108,7 +138,33 @@ def steps8(num): # USE FOR 8 STEP COUNTER-CLOCKWISE MOTOR ROTATION
       #--- End code that determines direction of rotation
   step8(0) # Turn motor off
 
+def steps4(num): # USE FOR 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
+  global pos # current position
+  global count # current counter
+  if num > 0:
+    for i in range (0, abs(num)):
+      step4(pos)
+      time.sleep(wait)
+      count += 1 #add 1 to counter
+      #--- Begin code that determines direction of rotation
+      if(pos == 1):
+        pos = 5
+      pos -= 1 #subtract 1 from motor pos
+      #--- End code that determines direction of rotation
+  else:
+    for i in range (0, abs(num)):
+      step4(pos)
+      time.sleep(wait)
+      count -= 1 #subtract 1 from counter
+      #--- Begin code that determines direction of rotation
+      pos += 1 # add 1 to motor pos
+      if(pos >= 5):
+        pos = 1
+      #--- End code that determines direction of rotation
+  step4(0) # Turn motor off
+
 #GPIO.cleanup()
+
 '''
 def steps8(num): # USE FOR 8 STEP CLOCKWISE MOTOR ROTATION
   global pos # current position
@@ -135,9 +191,9 @@ def steps8(num): # USE FOR 8 STEP CLOCKWISE MOTOR ROTATION
       pos -= 1 #subtract 1 from motor pos
       #--- End code that determines direction of rotation
   step8(0) # Turn motor off
-
 '''
 
+'''
 # CALIBRATION CODE
 def calibrate(amount,motor): #calibrate each motor by hand
   st = amount
@@ -179,7 +235,5 @@ def autocalibrate(): #reverse 'last positions' for autocalibration
   m2 = 0
   m3 = 0
 
-
 #GPIO.cleanup()
-
 '''
