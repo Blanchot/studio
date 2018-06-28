@@ -35,7 +35,7 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
-print('Use: steps(num)')
+#print('Use: steps(num)')
 
 #---STEPPER MOTOR CONTROL CODE---
 
@@ -135,7 +135,15 @@ while True:
     print(vol_time)
     print('5 minute volume: ', volume3)
     logging.info('From: {}, Vol: {}'.format(vol_time, volume3))
+    '''
+    #---SEND TO MOTOR CONTROL
+    if volume3 < 2500:
+      motor_steps = int(volume3 * 3)
+      steps(motor_steps)
+    else:
+      motor_steps = 8000
     time.sleep(65) # wait a bit more than a minute to escape if = true
+    '''
   else:
     time.sleep(5)
 
