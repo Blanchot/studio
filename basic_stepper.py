@@ -1,7 +1,6 @@
-# Basic Stepper Code based on iStep2.py code
+# Basic Stepper Code (for 4 and 8 step control) 
 #Load from CLI: python3 -i basic_stepper.py
-#To calibrate motors: calibrate(amount,motor)
-#To autocalibrate: autocalibrate()
+#To do: see if I can make use of older autocalibrate code...
 #Motor control based on code from here: 
 #http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 
@@ -139,7 +138,7 @@ def steps8(num): # USE FOR 8 STEP COUNTER-CLOCKWISE MOTOR ROTATION
   step8(0) # Turn motor off
 
 
-'''
+
 def steps4(num): # USE FOR 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
   global pos # current position
   global count # current counter
@@ -165,10 +164,11 @@ def steps4(num): # USE FOR 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
       #--- End code that determines direction of rotation
   step4(0) # Turn motor off
 
-'''
+
 #GPIO.cleanup()
 
 '''
+# ---CODE FOR 4 AND 8 STEP CLOCKWISE MOTOR ROTATION---
 def steps8(num): # USE FOR 8 STEP CLOCKWISE MOTOR ROTATION
   global pos # current position
   global count # current counter
@@ -193,9 +193,6 @@ def steps8(num): # USE FOR 8 STEP CLOCKWISE MOTOR ROTATION
       pos -= 1 #subtract 1 from motor pos
       #--- End code that determines direction of rotation
   step8(0) # Turn motor off
-
-'''
-
 
 def steps4(num): # USE FOR 4 STEP CLOCKWISE MOTOR ROTATION
   global pos # current position
@@ -222,22 +219,11 @@ def steps4(num): # USE FOR 4 STEP CLOCKWISE MOTOR ROTATION
       #--- End code that determines direction of rotation
   step4(0) # Turn motor off
 
+'''
 
 
 '''
 # CALIBRATION CODE
-def calibrate(amount,motor): #calibrate each motor by hand
-  st = amount
-  if motor == 0:
-    m0steps_8(st)
-  elif motor == 1:
-    m1steps_8(st)
-  elif motor == 2:
-    m2steps_8(st)
-  elif motor == 3:
-    m3steps_8(st)
-  else:
-    print("motor selector out of range")
 
 def autocalibrate(): #reverse 'last positions' for autocalibration
   global m0
