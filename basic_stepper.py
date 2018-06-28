@@ -138,6 +138,8 @@ def steps8(num): # USE FOR 8 STEP COUNTER-CLOCKWISE MOTOR ROTATION
       #--- End code that determines direction of rotation
   step8(0) # Turn motor off
 
+
+'''
 def steps4(num): # USE FOR 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
   global pos # current position
   global count # current counter
@@ -163,6 +165,7 @@ def steps4(num): # USE FOR 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
       #--- End code that determines direction of rotation
   step4(0) # Turn motor off
 
+'''
 #GPIO.cleanup()
 
 '''
@@ -174,7 +177,6 @@ def steps8(num): # USE FOR 8 STEP CLOCKWISE MOTOR ROTATION
       step8(pos)
       time.sleep(wait)
       count += 1 #add 1 to counter
-      
       #--- Begin code that determines direction of rotation
       pos += 1 # add 1 to motor pos
       if(pos >= 9):
@@ -191,7 +193,36 @@ def steps8(num): # USE FOR 8 STEP CLOCKWISE MOTOR ROTATION
       pos -= 1 #subtract 1 from motor pos
       #--- End code that determines direction of rotation
   step8(0) # Turn motor off
+
 '''
+
+
+def steps4(num): # USE FOR 4 STEP CLOCKWISE MOTOR ROTATION
+  global pos # current position
+  global count # current counter
+  if num > 0:
+    for i in range (0, abs(num)):
+      step4(pos)
+      time.sleep(wait)
+      count += 1 #add 1 to counter
+      #--- Begin code that determines direction of rotation
+      pos += 1 # add 1 to motor pos
+      if(pos >= 5):
+        pos = 1
+      #--- End code that determines direction of rotation
+  else:
+    for i in range (0, abs(num)):
+      step4(pos)
+      time.sleep(wait)
+      count -= 1 #subtract 1 from counter
+      #--- Begin code that determines direction of rotation
+      if(pos == 1):
+        pos = 5
+      pos -= 1 #subtract 1 from motor pos
+      #--- End code that determines direction of rotation
+  step4(0) # Turn motor off
+
+
 
 '''
 # CALIBRATION CODE
