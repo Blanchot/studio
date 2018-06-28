@@ -1,7 +1,7 @@
-# BTC volume Stepper Test based on iStep2.py code
-#Load from CLI: python3 -i iStep2.py
-#To calibrate motors: calibrate(amount,motor)
-#To autocalibrate: autocalibrate()
+# flag_btc01 
+#based on 4 step 'Basic Stepper Code'
+#Load from CLI: python3 -i flag_btc.py
+#To do: see if I can make use of older autocalibrate code...
 #Motor control based on code from here: 
 #http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 
@@ -14,6 +14,7 @@ pos = 1 # values 0 to 8
 count = 0 # motor counter
 
 GPIO.setmode(GPIO.BCM)
+#GPIO.setwarnings(True)
 GPIO.setwarnings(False)
 
 # pins setup
@@ -23,6 +24,8 @@ GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
 print('Use: steps(num)')
+
+
 
 def step(pos):
   if pos==0:
@@ -39,79 +42,26 @@ def step(pos):
     GPIO.output(25,0)
   elif pos==2:
     #print('Pos: 2')
-    GPIO.output(18,1)
+    GPIO.output(18,0)
     GPIO.output(23,1)
     GPIO.output(24,0)
     GPIO.output(25,0)
   elif pos==3:
     #print('Pos: 3')
     GPIO.output(18,0)
-    GPIO.output(23,1)
-    GPIO.output(24,0)
+    GPIO.output(23,0)
+    GPIO.output(24,1)
     GPIO.output(25,0)
   elif pos==4:
     #print('Pos: 4')
     GPIO.output(18,0)
-    GPIO.output(23,1)
-    GPIO.output(24,1)
-    GPIO.output(25,0)
-  elif pos==5:
-    #print('Pos: 5')
-    GPIO.output(18,0)
-    GPIO.output(23,0)
-    GPIO.output(24,1)
-    GPIO.output(25,0)
-  elif pos==6:
-    #print('Pos: 6')
-    GPIO.output(18,0)
-    GPIO.output(23,0)
-    GPIO.output(24,1)
-    GPIO.output(25,1)
-  elif pos==7:
-    #print('Pos: 7')
-    GPIO.output(18,0)
-    GPIO.output(23,0)
-    GPIO.output(24,0)
-    GPIO.output(25,1)
-  elif pos==8:
-    #print('Pos: 8')
-    GPIO.output(18,1)
     GPIO.output(23,0)
     GPIO.output(24,0)
     GPIO.output(25,1)
 
 
-def steps(num):
-  #print(num)
-  global pos # current position
-  global count # current counter
-  if num > 0: #reversed original code- was if(value<0):
-    for i in range (0, abs(num)):
-      step(pos)
-      time.sleep(wait)
-      count += 1 #add 1 to counter (reversed)
-      pos += 1 #add 1 to pos
-      if(pos >= 9):
-        pos = 1
-  else:
-    for i in range (0, abs(num)):
-      step(pos)
-      time.sleep(wait)
-      count -= 1 #subtract 1 from counter (reversed)
-      if(pos == 1):
-        pos = 9
-      pos -= 1
-  step(0) # Turn motor off
 
-
-#GPIO.cleanup()
-
-
-
-'''
-# CODE FOR HALF-STEP CLOCKWISE ROTATION
-def steps(num): #for clockwise rotation
-  #print(num)
+def steps(num): # 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
   global pos # current position
   global count # current counter
   if num > 0:
@@ -119,33 +69,29 @@ def steps(num): #for clockwise rotation
       step(pos)
       time.sleep(wait)
       count += 1 #add 1 to counter
-      pos += 1 # add 1 to motor pos
-      if(pos >= 9):
-        pos = 1
+      #--- Begin code that determines direction of rotation
+      if(pos == 1):
+        pos = 5
+      pos -= 1 #subtract 1 from motor pos
+      #--- End code that determines direction of rotation
   else:
     for i in range (0, abs(num)):
       step(pos)
       time.sleep(wait)
       count -= 1 #subtract 1 from counter
-      if(pos == 1):
-        pos = 9
-      pos -= 1
+      #--- Begin code that determines direction of rotation
+      pos += 1 # add 1 to motor pos
+      if(pos >= 5):
+        pos = 1
+      #--- End code that determines direction of rotation
   step(0) # Turn motor off
 
 
+#GPIO.cleanup()
+
+
+'''
 # CALIBRATION CODE
-def calibrate(amount,motor): #calibrate each motor by hand
-  st = amount
-  if motor == 0:
-    m0steps_8(st)
-  elif motor == 1:
-    m1steps_8(st)
-  elif motor == 2:
-    m2steps_8(st)
-  elif motor == 3:
-    m3steps_8(st)
-  else:
-    print("motor selector out of range")
 
 def autocalibrate(): #reverse 'last positions' for autocalibration
   global m0
@@ -174,7 +120,5 @@ def autocalibrate(): #reverse 'last positions' for autocalibration
   m2 = 0
   m3 = 0
 
-
 #GPIO.cleanup()
-
 '''
