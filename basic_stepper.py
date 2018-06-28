@@ -102,7 +102,7 @@ def steps8(num): #for oounterclockwise rotation
       pos += 1 # add 1 to motor pos
       if(pos >= 9):
         pos = 1
-  step(0) # Turn motor off
+  step8(0) # Turn motor off
 
 #GPIO.cleanup()
 
