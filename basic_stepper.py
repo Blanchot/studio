@@ -91,17 +91,21 @@ def steps8(num): #for oounterclockwise rotation
       step8(pos)
       time.sleep(wait)
       count -= 1 #subtract 1 from counter
-      if(pos == 1):
-        pos = 9
-      pos -= 1 #subtract 1 from motor pos
+      #--- Begin code that determines direction of rotation
+      pos += 1 # add 1 to motor pos
+      if(pos >= 9):
+        pos = 1
+      #--- End code that determines direction of rotation    
   else:
     for i in range (0, abs(num)):
       step8(pos)
       time.sleep(wait)
       count += 1 #add 1 to counter
-      pos += 1 # add 1 to motor pos
-      if(pos >= 9):
-        pos = 1
+      #--- Begin code that determines direction of rotation
+      if(pos == 1):
+        pos = 9
+      pos -= 1 #subtract 1 from motor pos
+      #--- End code that determines direction of rotation   
   step8(0) # Turn motor off
 
 #GPIO.cleanup()
