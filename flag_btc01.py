@@ -109,6 +109,31 @@ def steps(num):
 
 
 '''
+# CODE FOR HALF-STEP CLOCKWISE ROTATION
+def steps(num): #for clockwise rotation
+  #print(num)
+  global pos # current position
+  global count # current counter
+  if num > 0:
+    for i in range (0, abs(num)):
+      step(pos)
+      time.sleep(wait)
+      count += 1 #add 1 to counter
+      pos += 1 # add 1 to motor pos
+      if(pos >= 9):
+        pos = 1
+  else:
+    for i in range (0, abs(num)):
+      step(pos)
+      time.sleep(wait)
+      count -= 1 #subtract 1 from counter
+      if(pos == 1):
+        pos = 9
+      pos -= 1
+  step(0) # Turn motor off
+
+
+# CALIBRATION CODE
 def calibrate(amount,motor): #calibrate each motor by hand
   st = amount
   if motor == 0:
