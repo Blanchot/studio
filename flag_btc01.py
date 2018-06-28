@@ -1,13 +1,25 @@
 # flag_btc01 
-#based on 4 step 'Basic Stepper Code'
-#Load from CLI: python3 -i flag_btc.py
-#To do: see if I can make use of older autocalibrate code...
-#Motor control based on code from here: 
-#http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
+# based on 4 step 'Basic Stepper Code'
+# and based on btc_volume01.py (for the BTC volume check code)
+# Load from CLI: python3 -i flag_btc.py
+# To do: see if I can make use of older autocalibrate code...
+# Current range: 0 - 8600 steps
+# Time to complete range approx. 1:30
+# 5 min vol max I've seen until now is 2500
 
+import datetime
+import requests, json
 import time
 import sys
 import RPi.GPIO as GPIO
+
+import logging
+format_string = '%(levelname)s: %(message)s'
+logging.basicConfig(level=logging.INFO, filename='BTC_flag_log.log', format=format_string)
+logging.info('Begin 5 Minute BTC Flag/Volume Log')
+
+interval_List = (2,7,12,17,22,27,32,37,42,47,52,57) #times to check- 2 min after each 5 min interval
+URL3 = "https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&aggregate=5&limit=3"
 
 wait = .01 # time to pause between motor steps
 pos = 1 # values 0 to 8
@@ -25,7 +37,7 @@ GPIO.setup(25, GPIO.OUT)
 
 print('Use: steps(num)')
 
-
+#---STEPPER MOTOR CONTROL CODE---
 
 def step(pos):
   if pos==0:
@@ -86,8 +98,47 @@ def steps(num): # 4 STEP COUNTER-CLOCKWISE MOTOR ROTATION
       #--- End code that determines direction of rotation
   step(0) # Turn motor off
 
-
 #GPIO.cleanup()
+
+# ---BTC VOLUME CHECK CODE 
+
+# get BTC market volume using the Cryptocompare 5 MINUTE API
+def get_BTC_5_min_volume():
+  try:
+    r = requests.get(URL3)
+    market_volume_txt = json.loads(r.text)
+    #time1 = json.loads(r.text)['Data'][0]['time']
+    #volume1 = json.loads(r.text)['Data'][0]['volumefrom']
+    #time2 = json.loads(r.text)['Data'][1]['time']
+    #volume2 = json.loads(r.text)['Data'][1]['volumefrom']
+    time3 = json.loads(r.text)['Data'][2]['time']
+    volume3 = json.loads(r.text)['Data'][2]['volumefrom']
+    return time3, volume3
+    #time4 = json.loads(r.text)['Data'][3]['time']
+    #volume4 = json.loads(r.text)['Data'][3]['volumefrom']
+  except requests.ConnectionError:
+    print("Error querying Cryptocompare API")
+
+
+def convert_seconds(secs):
+  converted = datetime.datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+  return converted
+
+
+
+while True:
+  tijd = time.localtime() #create a struct_time object
+  if tijd[4] in interval_List: #and check if the number of minutes is in the interval_List
+    time3, volume3 = get_BTC_5_min_volume()
+    print()
+    vol_time = convert_seconds(time3)
+    print(vol_time)
+    print('5 minute volume: ', volume3)
+    logging.info('From: {}, Vol: {}'.format(vol_time, volume3))
+    time.sleep(65) # wait a bit more than a minute to escape if = true
+  else:
+    time.sleep(5)
+
 
 
 '''
