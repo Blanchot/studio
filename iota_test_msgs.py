@@ -7,14 +7,20 @@ from iota import Iota
 from iota import Address
 from iota.commands.extended.utils import find_transaction_objects
 
+iotaNode = "https://field.carriota.com:443"
+# Create an IOTA object
+api = Iota(iotaNode, "")
+# Thalia Receive address:
+#address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
+
 # Thalia Receive address
-list_add = [Address('RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
+list_add = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
 
 '''
 A: There's a utility function called find_transaction_objects (that will be added to the main API soon) that may be useful here. It does the same thing as find_transactions, except it then converts the trytes that the IRI sends back into proper iota.transaction.base.Transaction objects. Once you have Transaction objects, you can access each one's signature_message_fragment (which is an iota.types.TryteString object) and decode it:
 '''
 
-transactions = find_transaction_objects(addresses=list_add)
+transactions = api.find_transaction_objects(addresses=list_add)
 
 for transaction in transactions:
   # Ignore input transactions; these have cryptographic signatures,
