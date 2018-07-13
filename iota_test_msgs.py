@@ -9,7 +9,8 @@ from iota.commands.extended.utils import find_transaction_objects
 
 iotaNode = "https://field.carriota.com:443"
 # Create an IOTA object
-api = Iota(iotaNode, "")
+# api = Iota(iotaNode, "")
+api = Iota(iotaNode)
 # Thalia Receive address:
 #address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
 
