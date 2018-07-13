@@ -6,13 +6,24 @@
 from iota import Iota
 from iota import Address, Transaction
 from iota.commands.extended.utils import find_transaction_objects
+from iota.adapter import HttpAdapter #trying this 
 
+api = Iota(HttpAdapter('https://field.carriota.com:443'))
+
+'''
+help(find_transaction_ojbects)
+find_transaction_objects(adapter, **kwargs)
+    Finds transactions matching the specified criteria, fetches the
+    corresponding trytes and converts them into Transaction objects.  
+'''
+'''
 iotaNode = "https://field.carriota.com:443"
 # Create an IOTA object
 # api = Iota(iotaNode, "")
 api = Iota(iotaNode)
 # Thalia Receive address:
 #address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
+'''
 
 # Thalia Receive address
 list_add = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
