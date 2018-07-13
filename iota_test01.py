@@ -1,27 +1,23 @@
-# Code based on Huggre's
+# Code based on Huggre's basic code:
 # https://gist.github.com/huggre/a3044e6094867fe04096e0c64dc60f3b
 # pyIOTA Api: https://github.com/iotaledger/iota.lib.py
 # pip3 install pyota
 
-# Imports some Python Date/Time functions
 import time
 import datetime
-
-# Imports GPIO library
-# import RPi.GPIO as GPIO
+from blinkt import set_pixel, set_brightness, show, clear
+set_brightness(0.1)
 
 # Imports the PyOTA library
 from iota import Iota
 from iota import Address
 
-# Setup O/I PIN's
-'''
-LEDPIN=18
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(LEDPIN,GPIO.OUT)
-GPIO.output(LEDPIN,GPIO.LOW)
-'''
+# URL to IOTA fullnode used when checking balance
+iotaNode = "https://field.carriota.com:443"
+# Create an IOTA object
+api = Iota(iotaNode, "")
+# Thalia Receive address:
+address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
 
 # Function for checking address balance on the IOTA tangle. 
 def checkbalance():
@@ -32,25 +28,27 @@ def checkbalance():
     print('Balance is: ',balance)
     return (balance[0])
 
-# URL to IOTA fullnode used when checking balance
-iotaNode = "https://field.carriota.com:443"
-
-# Create an IOTA object
-api = Iota(iotaNode, "")
-
-# IOTA address to be checked for new light funds 
-# IOTA addresses can be created using the IOTA Wallet
-# Thalia Reeive address:
-address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
-
 # Get current address balance at startup and use as baseline for measuring new funds being added.   
 currentbalance = checkbalance()
-# lastbalance = currentbalance
+lastbalance = currentbalance
 
 # Define some variables
 # lightbalance = 0
 # balcheckcount = 0
 # lightstatus = False
+
+while True:
+  currentbalance = checkbalance()
+  if currentbalance > lastbalance:
+    clear()
+    set_pixel(0,255,0,0)
+    show()
+    time.sleep(300)
+    clear()
+    show()
+    lastbalance = currentbalance
+  time.sleep(5)
+
 
 '''
 # Main loop that executes every 1 second
