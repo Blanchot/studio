@@ -21,7 +21,7 @@ A: There's a utility function called find_transaction_objects (that will be adde
 '''
 
 # transactions = api.find_transaction_objects(addresses=list_add)
-transactions = find_transaction_objects(addresses=list_add)
+transactions = find_transaction_objects(api, addresses=list_add)
 
 for transaction in transactions:
   # Ignore input transactions; these have cryptographic signatures,
