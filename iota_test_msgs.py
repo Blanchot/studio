@@ -21,7 +21,8 @@ for transaction in transactions:
   # not human-readable messages.
   if transaction.value < 0:
     continue
-  print(f'Message from {transaction.hash}:')
+  #print(f'Message from {transaction.hash}:')
+  print('Message from: ',transaction.hash)
   message = transaction.signature_message_fragment
   if message is None:
     print('(None)')
