@@ -26,7 +26,7 @@ def checkbalance():
     gb_result = api.get_balances(address)
     balance = gb_result['balances']
     print('Balance is: ',balance)
-    return (balance[0])
+    return (balance[0]) #not needed now?
 
 # Get current address balance at startup and use as baseline for measuring new funds being added.   
 currentbalance = checkbalance()
@@ -38,7 +38,9 @@ lastbalance = currentbalance
 # lightstatus = False
 
 while True:
-  currentbalance = checkbalance()
+  gb_result = api.get_balances(address)
+  balance = gb_result['balances']
+  currentbalance = balance[0]
   if currentbalance > lastbalance:
     clear()
     set_pixel(0,255,0,0)
