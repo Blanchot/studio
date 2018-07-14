@@ -50,6 +50,7 @@ lastbalance = currentbalance
 # balcheckcount = 0
 # lightstatus = False
 
+'''
 while True:
   gb_result = api.get_balances(address)
   balance = gb_result['balances']
@@ -59,18 +60,9 @@ while True:
       draw.rectangle(device.bounding_box, outline="white", fill="black")
       draw.text((30, 40), currentbalance, fill="white")
       #draw.text((30, 40), "Hello World", fill="white")
-    
-    '''
-    clear()
-    set_pixel(0,255,0,0)
-    show()
-    time.sleep(300)
-    clear()
-    show()
-    '''
     lastbalance = currentbalance
   time.sleep(5)
-
+'''
 
 
 '''
