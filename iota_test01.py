@@ -1,3 +1,5 @@
+# iota_test01 v.2
+# using luma.oled 
 # Code based on Huggre's basic code:
 # https://gist.github.com/huggre/a3044e6094867fe04096e0c64dc60f3b
 # pyIOTA Api: https://github.com/iotaledger/iota.lib.py
@@ -5,10 +7,18 @@
 
 import time
 import datetime
-from blinkt import set_pixel, set_brightness, show, clear
-set_brightness(0.1)
+#from blinkt import set_pixel, set_brightness, show, clear
+#set_brightness(0.1)
 
-# Imports the PyOTA library
+# setting up luma.oled
+from luma.core.interface.serial import i2c
+from luma.core.render import canvas
+from luma.oled.device import ssd1306
+
+serial = i2c(port=1, address=0x3C)
+device = ssd1306(serial, rotate=0)
+
+# Import the PyOTA library
 from iota import Iota
 from iota import Address
 
@@ -26,7 +36,10 @@ def checkbalance():
     gb_result = api.get_balances(address)
     balance = gb_result['balances']
     print('Balance is: ',balance)
-    return (balance[0]) #not needed now?
+    #return (balance[0]) #not needed now?
+    with canvas(device) as draw:
+      draw.rectangle(device.bounding_box, outline="white", fill="black")
+      draw.text((30, 40), currentbalance, fill="white")
 
 # Get current address balance at startup and use as baseline for measuring new funds being added.   
 currentbalance = checkbalance()
@@ -42,14 +55,22 @@ while True:
   balance = gb_result['balances']
   currentbalance = balance[0]
   if currentbalance > lastbalance:
+    with canvas(device) as draw:
+      draw.rectangle(device.bounding_box, outline="white", fill="black")
+      draw.text((30, 40), currentbalance, fill="white")
+      #draw.text((30, 40), "Hello World", fill="white")
+    
+    '''
     clear()
     set_pixel(0,255,0,0)
     show()
     time.sleep(300)
     clear()
     show()
+    '''
     lastbalance = currentbalance
   time.sleep(5)
+
 
 
 '''
