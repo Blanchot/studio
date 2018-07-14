@@ -36,6 +36,7 @@ def checkbalance():
     gb_result = api.get_balances(address)
     balance = gb_result['balances']
     print('Balance is: ',balance[0])
+    print(type(balance[0]))
     bal_text = str(balance[0])
     #return (balance[0]) #not needed now?
     with canvas(device) as draw:
