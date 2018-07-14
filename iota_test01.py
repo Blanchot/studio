@@ -39,7 +39,7 @@ def checkbalance():
     #return (balance[0]) #not needed now?
     with canvas(device) as draw:
       draw.rectangle(device.bounding_box, outline="white", fill="black")
-      draw.text((30, 40), balance, fill="white")
+      draw.text((30, 40), balance[0], fill="white")
 
 # Get current address balance at startup and use as baseline for measuring new funds being added.   
 currentbalance = checkbalance()
