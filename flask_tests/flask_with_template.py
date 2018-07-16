@@ -40,7 +40,7 @@ def hello():
   # such as HELLO!) to pass into the template
   templateData = {
     'title' : 'THALIA',
-    'time': timeString
+    'time': timeString,
     'balance': iota_balance
     }
   # Return the main.html template to the web browser using the variables in the templateData dictionary
