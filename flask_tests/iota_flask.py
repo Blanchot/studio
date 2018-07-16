@@ -12,6 +12,7 @@ from flask import Flask, render_template
 import datetime
 import requests, json
 
+URL = 'https://min-api.cryptocompare.com/data/price?fsym=IOT&tsyms=EUR'
 app = Flask(__name__)
 
 # URL to IOTA fullnode used when checking balance
@@ -21,6 +22,14 @@ app = Flask(__name__)
 # Thalia Receive address:
 # address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
 
+# get BTC market volume using the Cryptocompare 5 MINUTE API
+def get_iota_price():
+  try:
+    r = requests.get(URL)
+    iota_price = json.loads(r.text)
+    return iota_price
+  except requests.ConnectionError:
+    print("Error querying Cryptocompare API")
 
 
 '''
@@ -37,7 +46,7 @@ def checkbalance():
 
 @app.route("/")
 def hello():
-  #iota_balance = checkbalance()
+  iota_price = get_iota_price()
   now = datetime.datetime.now()
   timeString = now.strftime("%Y-%m-%d %H:%M")
   
@@ -45,8 +54,8 @@ def hello():
   # such as HELLO!) to pass into the template
   templateData = {
     'title' : 'THALIA',
-    'time': timeString
-    #'balance': iota_balance
+    'time': timeString,
+    'price': iota_price
     }
   # Return the main.html template to the web browser using the variables in the templateData dictionary
   return render_template('main.html', **templateData)
