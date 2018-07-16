@@ -10,6 +10,7 @@
 # Import the flask main module and the render_template
 from flask import Flask, render_template
 import datetime
+import requests, json
 
 app = Flask(__name__)
 
