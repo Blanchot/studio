@@ -26,7 +26,7 @@ app = Flask(__name__)
 def get_iota_price():
   try:
     r = requests.get(URL)
-    iota_price = json.loads(r.text)
+    iota_price = json.loads(r.text)['EUR']
     return iota_price
   except requests.ConnectionError:
     print("Error querying Cryptocompare API")
