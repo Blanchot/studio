@@ -4,24 +4,25 @@
 # with placeholders for spots where you want dynamic data to be inserted.
 
 # Import the PyOTA library
-from iota import Iota
-from iota import Address
+# from iota import Iota
+# from iota import Address
 
 # Import the flask main module and the render_template
 from flask import Flask, render_template
 import datetime
 
 app = Flask(__name__)
+
 # URL to IOTA fullnode used when checking balance
-iotaNode = "https://field.carriota.com:443"
+# iotaNode = "https://field.carriota.com:443"
 # Create an IOTA object
-api = Iota(iotaNode, "")
+# api = Iota(iotaNode, "")
 # Thalia Receive address:
-address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
+# address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
 
 
 
-
+'''
 # Function for checking address balance on the IOTA tangle. 
 def checkbalance():
   #print("Checking balance")
@@ -30,12 +31,12 @@ def checkbalance():
   #print('Balance is: ',balance[0])
   bal_text = 'Balance: ' + str(balance[0])
   return bal_text
-
+'''
 
 
 @app.route("/")
 def hello():
-  iota_balance = checkbalance()
+  #iota_balance = checkbalance()
   now = datetime.datetime.now()
   timeString = now.strftime("%Y-%m-%d %H:%M")
   
@@ -43,8 +44,8 @@ def hello():
   # such as HELLO!) to pass into the template
   templateData = {
     'title' : 'THALIA',
-    'time': timeString,
-    'balance': iota_balance
+    'time': timeString
+    #'balance': iota_balance
     }
   # Return the main.html template to the web browser using the variables in the templateData dictionary
   return render_template('main.html', **templateData)
