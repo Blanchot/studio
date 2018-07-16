@@ -47,6 +47,7 @@ def checkbalance():
 @app.route("/")
 def hello():
   iota_price = get_iota_price()
+  print(iota_price)
   now = datetime.datetime.now()
   timeString = now.strftime("%Y-%m-%d %H:%M")
   
