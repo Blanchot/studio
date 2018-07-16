@@ -3,13 +3,13 @@
 # Flask uses a template engine called Jinja2 so that you can use separate HTML files
 # with placeholders for spots where you want dynamic data to be inserted.
 
-# Import the flask main module and the render_template
-from flask import Flask, render_template
-import datetime
-
 # Import the PyOTA library
 from iota import Iota
 from iota import Address
+
+# Import the flask main module and the render_template
+from flask import Flask, render_template
+import datetime
 
 app = Flask(__name__)
 # URL to IOTA fullnode used when checking balance
@@ -18,6 +18,9 @@ iotaNode = "https://field.carriota.com:443"
 api = Iota(iotaNode, "")
 # Thalia Receive address:
 address = [Address(b'RNSVVCTUYTCMZVTUAOUZUZSXKE9XZGUNAG9XNDLEKXFUDE9MSLAEQIJRFIFUCRFIZFCZNZAYFDJFQFELZMFOWWJNTD')]
+
+
+
 
 # Function for checking address balance on the IOTA tangle. 
 def checkbalance():
