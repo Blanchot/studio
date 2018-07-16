@@ -4,7 +4,6 @@
 # with placeholders for spots where you want dynamic data to be inserted.
 
 # Import the PyOTA library
-import iota
 from iota import Iota
 from iota import Address
 
