@@ -2,6 +2,8 @@
 # led_shim01.py code modified and extended
 # beta 2: initial btc code
 # four letter phat functions: http://docs.pimoroni.com/fourletterphat/
+# 26.06.2018 code cleanup
+# 22.06.2019 value of Bitcoin is over 9,999. Adding characters for thousands place.
 
 import ledshim
 import fourletterphat
@@ -109,7 +111,26 @@ while True:
   ledshim.clear()
   
   BTC_in_USD = get_BTC_price_in_USD()
-  fourletterphat.print_number_str(BTC_in_USD)
+  # If BTC_in_USD > 9999 convert initial thousands place to hexadecimal
+  if BTC_in_USD > 9999:
+    BTC_str= str(BTC_in_USD)
+    if BTC_str[0:2] == '10':
+      BTC_str_hex= 'A'
+    elif if BTC_str[0:2] == '11':
+      BTC_str_hex= 'B'
+    elif if BTC_str[0:2] == '12':
+      BTC_str_hex= 'C'
+    elif if BTC_str[0:2] == '13':
+      BTC_str_hex= 'D'
+    elif if BTC_str[0:2] == '14':
+      BTC_str_hex= 'E'
+    elif if BTC_str[0:2] == '15':
+      BTC_str_hex= 'F'
+    BTC_str_dec= BTC_str[2:5] #Last 3 digits left as decimal
+    BTC_str= BTC_str_hex + BTC_str_dec
+    fourletterphat.print_str(BTC_str)
+  else:
+    fourletterphat.print_number_str(BTC_in_USD)
   pixel_list = make_rise_fall_list(BTC_in_USD)
   for num in range(num_of_pixels):
     ledshim.set_pixel(num, *pixel_list[num])
