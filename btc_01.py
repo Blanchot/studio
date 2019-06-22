@@ -116,15 +116,15 @@ while True:
     BTC_str= str(BTC_in_USD)
     if BTC_str[0:2] == '10':
       BTC_str_hex= 'A'
-    elif if BTC_str[0:2] == '11':
+    elif BTC_str[0:2] == '11':
       BTC_str_hex= 'B'
-    elif if BTC_str[0:2] == '12':
+    elif BTC_str[0:2] == '12':
       BTC_str_hex= 'C'
-    elif if BTC_str[0:2] == '13':
+    elif BTC_str[0:2] == '13':
       BTC_str_hex= 'D'
-    elif if BTC_str[0:2] == '14':
+    elif BTC_str[0:2] == '14':
       BTC_str_hex= 'E'
-    elif if BTC_str[0:2] == '15':
+    elif BTC_str[0:2] == '15':
       BTC_str_hex= 'F'
     BTC_str_dec= BTC_str[2:5] #Last 3 digits left as decimal
     BTC_str= BTC_str_hex + BTC_str_dec
