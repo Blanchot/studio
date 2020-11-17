@@ -4,6 +4,7 @@
 # four letter phat functions: http://docs.pimoroni.com/fourletterphat/
 # 26.06.2018 code cleanup
 # 22.06.2019 value of Bitcoin is over 9,999. Adding characters for thousands place.
+# 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
 
 import ledshim
 import fourletterphat
@@ -112,6 +113,7 @@ while True:
   
   BTC_in_USD = get_BTC_price_in_USD()
   # If BTC_in_USD > 9999 convert initial thousands place to hexadecimal
+  # 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
   if BTC_in_USD > 9999:
     BTC_str= str(BTC_in_USD)
     if BTC_str[0:2] == '10':
@@ -126,6 +128,16 @@ while True:
       BTC_str_hex= 'E'
     elif BTC_str[0:2] == '15':
       BTC_str_hex= 'F'
+    elif BTC_str[0:2] == '16':
+      BTC_str_hex= 'G'
+    elif BTC_str[0:2] == '17':
+      BTC_str_hex= 'H'
+    elif BTC_str[0:2] == '18':
+      BTC_str_hex= 'I'
+    elif BTC_str[0:2] == '19':
+      BTC_str_hex= 'J'
+    elif BTC_str[0:2] == '20':
+      BTC_str_hex= 'K'
     BTC_str_dec= BTC_str[2:5] #Last 3 digits left as decimal
     BTC_str= BTC_str_hex + BTC_str_dec
     fourletterphat.print_str(BTC_str)
