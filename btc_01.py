@@ -5,6 +5,7 @@
 # 26.06.2018 code cleanup
 # 22.06.2019 value of Bitcoin is over 9,999. Adding characters for thousands place.
 # 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
+# 2020.12.19 Added more letters L=21 through P=25... bitcoin keeps rising!!!
 
 import ledshim
 import fourletterphat
@@ -114,6 +115,7 @@ while True:
   BTC_in_USD = get_BTC_price_in_USD()
   # If BTC_in_USD > 9999 convert initial thousands place to hexadecimal
   # 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
+  # 2020.12.19 Added more letters L=21 through P=25... bitcoin keeps rising!
   if BTC_in_USD > 9999:
     BTC_str= str(BTC_in_USD)
     if BTC_str[0:2] == '10':
@@ -138,6 +140,16 @@ while True:
       BTC_str_hex= 'J'
     elif BTC_str[0:2] == '20':
       BTC_str_hex= 'K'
+    elif BTC_str[0:2] == '21':
+      BTC_str_hex= 'L'
+    elif BTC_str[0:2] == '22':
+      BTC_str_hex= 'M'
+    elif BTC_str[0:2] == '23':
+      BTC_str_hex= 'N'
+    elif BTC_str[0:2] == '24':
+      BTC_str_hex= 'O'
+    elif BTC_str[0:2] == '25':
+      BTC_str_hex= 'P'
     BTC_str_dec= BTC_str[2:5] #Last 3 digits left as decimal
     BTC_str= BTC_str_hex + BTC_str_dec
     fourletterphat.print_str(BTC_str)
