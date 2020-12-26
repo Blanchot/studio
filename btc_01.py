@@ -6,6 +6,7 @@
 # 22.06.2019 value of Bitcoin is over 9,999. Adding characters for thousands place.
 # 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
 # 2020.12.19 Added more letters L=21 through P=25... bitcoin keeps rising!!!
+# 2020.12.26 Added more letters Q=26 through Z=35... can't add more than these!
 
 import ledshim
 import fourletterphat
@@ -150,6 +151,26 @@ while True:
       BTC_str_hex= 'O'
     elif BTC_str[0:2] == '25':
       BTC_str_hex= 'P'
+    elif BTC_str[0:2] == '26':
+      BTC_str_hex= 'Q'
+    elif BTC_str[0:2] == '27':
+      BTC_str_hex= 'R'
+    elif BTC_str[0:2] == '28':
+      BTC_str_hex= 'S'
+    elif BTC_str[0:2] == '29':
+      BTC_str_hex= 'T'
+    elif BTC_str[0:2] == '30':
+      BTC_str_hex= 'U'
+    elif BTC_str[0:2] == '31':
+      BTC_str_hex= 'V'
+    elif BTC_str[0:2] == '32':
+      BTC_str_hex= 'W'
+    elif BTC_str[0:2] == '33':
+      BTC_str_hex= 'X'
+    elif BTC_str[0:2] == '34':
+      BTC_str_hex= 'Y'
+    elif BTC_str[0:2] == '35':
+      BTC_str_hex= 'Z'   
     BTC_str_dec= BTC_str[2:5] #Last 3 digits left as decimal
     BTC_str= BTC_str_hex + BTC_str_dec
     fourletterphat.print_str(BTC_str)
