@@ -7,6 +7,7 @@
 # 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
 # 2020.12.19 Added more letters L=21 through P=25... bitcoin keeps rising!!!
 # 2020.12.26 Added more letters Q=26 through Z=35... can't add more than these!
+# 2021.02.11 Changed display to show first 4 digits (and remove the last)
 
 import ledshim
 import fourletterphat
@@ -114,6 +115,13 @@ while True:
   ledshim.clear()
   
   BTC_in_USD = get_BTC_price_in_USD()
+  
+  # Divding by 10:
+  BTC_in_USD = BTC_in_USD //10  
+  
+  '''
+  # 2021.02.11 BITCOIN VALUE TOO HIGH! NO LONGER USING THIS TO CONVERT THOUSANDS VALUE TO A LETTER
+  # INSTEAD I'M DIVIDING THE VALUE BY 10 ==VAL//10
   # If BTC_in_USD > 9999 convert initial thousands place to hexadecimal
   # 2020.11.17 Added letters G=16 through K=20... bitcoin broke my code!
   # 2020.12.19 Added more letters L=21 through P=25... bitcoin keeps rising!
@@ -176,6 +184,10 @@ while True:
     fourletterphat.print_str(BTC_str)
   else:
     fourletterphat.print_number_str(BTC_in_USD)
+  '''
+  
+  fourletterphat.print_number_str(BTC_in_USD)
+  
   pixel_list = make_rise_fall_list(BTC_in_USD)
   for num in range(num_of_pixels):
     ledshim.set_pixel(num, *pixel_list[num])
